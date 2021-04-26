@@ -1,5 +1,5 @@
 from math import ceil
-from Data import print_details as print_data
+from data import print_details as print_data
 
 
 def sum(values):
