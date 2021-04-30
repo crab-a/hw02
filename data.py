@@ -14,4 +14,12 @@ class Data:
         return list(regions_set)
 
     def set_districts_data(self, districts):
+        new_data = {}
+        for i in self.data.keys():
+            new_data.add(i)
+        for index, region in enumerate(self.data["denominazione_region"]):
+            if region in districts:
+                for key in self.data.keys():
+                    new_data[key][index] = self.data[key][index]
+        self.data = new_data
 
