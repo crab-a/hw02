@@ -10,7 +10,7 @@ class Districts:
 
     def filter_districts(self, letters):
         """
-        that method receives a list of letters and change the object according that list and the region names
+        that method receives a list of letters and change the object according to that list and the region names
         in the object
         :param letters: a list of letters to convert the object by
         :return: void
@@ -39,15 +39,23 @@ class Districts:
                     print("{:.14f}".format(func(self.dataset.data[feature])) + ", ", end="")
 
     def determine_day_type(self):
+        """
+        add new column to the dataset which tells if it was a good day
+        :return: void
+        """
         day_type = []
-        types = {}
+        values = {}
         for index, day in enumerate(self.dataset.data['data']):
             is_good_day = self.dataset.data['resigned_healed'][index] > self.dataset.data['new_positives'][index]
             day_type.append(is_good_day)
-        types['day_type'] = day_type  # im not sure it dosent add a list with the wrong order
-        self.dataset.data.update(types)
+        values['day_type'] = day_type  # im not sure it doesn't add a list with the wrong order
+        self.dataset.data.update(values)
 
     def get_districts_class(self):
+        """
+        make a dictionary of all districts as keys and the values tells if the district is considered green
+        :return: the dictionary
+        """
         regions = self.dataset.get_all_districts()
         district_class = dict.fromkeys(regions, 0)
         for entry, day in enumerate(self.dataset.data['data']):

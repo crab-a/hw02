@@ -2,7 +2,7 @@ def mean(values):
     """
     calculate the mean of all values in the iterable 'values'
     :param values: iterable containing numbers(int/float/double)
-    :return: the meanRR
+    :return: the mean
     """
     total = sum(values)
     length = len(values)
@@ -13,7 +13,7 @@ def median(values):
     """
     calculate the median of all values in the iterable 'values'
     :param values: iterable containing numbers(int/float/double)
-    :return: the medianR
+    :return: the median
     """
     length = len(values)
     sorted_values = sorted(values)

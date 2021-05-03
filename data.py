@@ -23,16 +23,18 @@ class Data:
 
     def set_districts_data(self, districts):
         """
-        this method receives a list of districts and change the data object by remain only the values for
+        this method receives a list of districts and change the data object keeping only the values for
         the regions which are in that list
         :param districts: a list of regions
         :return: void
         """
         new_data = {}
-        for i in self.data.keys():
-            new_data.add(i)
-        for index, region in enumerate(self.data["denominazione_region"]):
-            if region in districts:
-                for key in self.data.keys():
-                    new_data[key][index] = self.data[key][index]
+        for key in self.data.keys():
+            new_col = []
+            data_entry = {}
+            for index, value in enumerate(self.data[key]):
+                if self.data['denominazione_region'][index] in districts:
+                    new_col.append(value)
+            data_entry[key] = new_col
+            new_data.update(data_entry)
         self.data = new_data
