@@ -16,10 +16,10 @@ class Data:
         this method return a list of the regions in the data object
         :return: list of the regions in the dataset
         """
-        regions_set = {}
+        regions_set = set()
         for region in self.data["denominazione_region"]:
-            regions_set[region] = 0  # dict dont have add but it create new key if he dont have
-        return list(regions_set.keys())
+            regions_set.add(region)
+        return list(regions_set)
 
     def set_districts_data(self, districts):
         """
@@ -36,4 +36,3 @@ class Data:
                 for key in self.data.keys():
                     new_data[key][index] = self.data[key][index]
         self.data = new_data
-

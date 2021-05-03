@@ -1,5 +1,3 @@
-import pandas
-import data
 
 
 class Districts:
@@ -49,9 +47,6 @@ class Districts:
         types['day_type'] = day_type  # im not sure it dosent add a list with the wrong order
         self.dataset.data.update(types)
 
-
-
-
     def get_districts_class(self):
         regions = self.dataset.get_all_districts()
         district_class = dict.fromkeys(regions, 0)
@@ -65,10 +60,3 @@ class Districts:
                 district_class[region] = 'not green'
 
         return district_class
-
-
-
-
-
-
-
