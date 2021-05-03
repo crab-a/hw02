@@ -18,8 +18,8 @@ class Data:
         """
         regions_set = {}
         for region in self.data["denominazione_region"]:
-            regions_set.add(region)
-        return list(regions_set)
+            regions_set[region] = 0  # dict dont have add but it create new key if he dont have
+        return list(regions_set.keys())
 
     def set_districts_data(self, districts):
         """

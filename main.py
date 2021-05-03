@@ -1,17 +1,35 @@
-import pandas
-# This is a sample Python script.
+import data
+import districts
+import statistics
+import sys
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def main(argv):
+    the_data = data.Data("dpc-covid19-ita-regioni_sample.csv")  # change to argv[1]
+    dist = districts.Districts(the_data)
+    dist.determine_day_type()
+
+    #  q1
+    print('Question 1:')
+    features = ['hospitalized_with_symptoms', 'intensive_care', 'total_hospitalized', 'home_insulation']
+    statistic_functions = [statistics.mean, statistics.median]
+    dist.print_details(features, statistic_functions)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+    #  q2
+    print('\nQuestion 2:')
+    not_green_count = 0
+    dist.determine_day_type()
+    districts_class = dist.get_districts_class()
+    for district in districts_class.keys():
+        if districts_class[district] == 'not green':
+            not_green_count += 1
+    total_lockdown = not_green_count>10
+    print(f'number of districts: {len(districts_class.keys())}')
+    print(f"Number of not green districts: {not_green_count}")
+    print(f"Will a lockdown be forced on whole of Italy?: {'yes' if total_lockdown else 'no'}")
 
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main(sys.argv)

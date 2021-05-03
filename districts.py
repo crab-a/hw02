@@ -36,9 +36,37 @@ class Districts:
             print(feature + ": ", end="")
             for func in statistic_functions:
                 if func == statistic_functions[-1]:
-                    print(func(data[feature]))
+                    print(func(self.dataset.data[feature]))
                 else:
-                    print("{:.14f}".format(func(data[feature])) + ", ", end="")
+                    print("{:.14f}".format(func(self.dataset.data[feature])) + ", ", end="")
+
+    def determine_day_type(self):
+        day_type = []
+        types = {}
+        for index, day in enumerate(self.dataset.data['data']):
+            is_good_day = self.dataset.data['resigned_healed'][index] > self.dataset.data['new_positives'][index]
+            day_type.append(is_good_day)
+        types['day_type'] = day_type  # im not sure it dosent add a list with the wrong order
+        self.dataset.data.update(types)
+
+
+
+
+    def get_districts_class(self):
+        regions = self.dataset.get_all_districts()
+        district_class = dict.fromkeys(regions, 0)
+        for entry, day in enumerate(self.dataset.data['data']):
+            if self.dataset.data['day_type'][entry]:
+                district_class[self.dataset.data['denominazione_region'][entry]] += 1
+        for region in regions:
+            if district_class[region] > 340:
+                district_class[region] = 'green'
+            else:
+                district_class[region] = 'not green'
+
+        return district_class
+
+
 
 
 
