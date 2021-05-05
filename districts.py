@@ -36,7 +36,7 @@ class Districts:
                 if func == statistic_functions[-1]:
                     print(func(self.dataset.data[feature]))
                 else:
-                    print("{:.14f}".format(func(self.dataset.data[feature])) + ", ", end="")
+                    print(format(func(self.dataset.data[feature])) + ", ", end="")
 
     def determine_day_type(self):
         """
